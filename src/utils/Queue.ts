@@ -5,26 +5,16 @@ export class Queue<T> {
     this.items.push(item);
   }
 
-  dequeue(): T | undefined {
+  dequeue(): T | null {
     if (this.isEmpty()) {
-      return undefined;
+      return null;
     }
-    return this.items.shift();
-  }
-
-  peek(): T | undefined {
-    if (this.isEmpty()) {
-      return undefined;
-    }
-    return this.items[0];
+    const item = this.items.shift();
+    return item === undefined ? null : item;
   }
 
   isEmpty(): boolean {
     return this.items.length === 0;
-  }
-
-  size(): number {
-    return this.items.length;
   }
 
   clear(): void {
