@@ -35,7 +35,7 @@ const updateCounter = (): void => {
 
 watch(() => nums, updateCounter);
 
-function resetCountRandomizations() {
+function resetCountRandomizations(): void {
   countRandomizations.value = 0;
 }
 // export default {

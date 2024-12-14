@@ -22,11 +22,11 @@ const { nums, isDelayed } = defineProps({
 const delayQueue = new Queue<string>();
 const outputNumsStr = ref<string | null>(null);
 
-const currentNumsStr = computed(() => {
+const currentNumsStr = computed((): string => {
   return nums.join(" ");
 });
 
-const updateOutput = () => {
+const updateOutput = (): void => {
   if (!isDelayed) {
     delayQueue.clear();
     outputNumsStr.value = currentNumsStr.value;

@@ -23,12 +23,12 @@ const { nums, isDelayed } = defineProps({
 const delayQueue = new Queue<string>();
 const outputHexColorStr = ref<string | null>(null);
 
-const currentNumsHexColorStr = computed(() => {
+const currentNumsHexColorStr = computed((): string => {
   const toHex = (value: number) => value.toString(16).padStart(2, "0");
   return `#${toHex(nums[0])}${toHex(nums[1])}${toHex(nums[2])}`;
 });
 
-const updateOutput = () => {
+const updateOutput = (): void => {
   if (!isDelayed) {
     delayQueue.clear();
     outputHexColorStr.value = currentNumsHexColorStr.value;
