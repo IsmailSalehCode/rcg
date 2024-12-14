@@ -23,7 +23,7 @@ const { nums, isDelayed } = defineProps({
   },
 });
 
-const updateCounter = () => {
+const updateCounter = (): void => {
   if (!isDelayed) {
     countRandomizations.value += 1;
     return;
