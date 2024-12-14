@@ -4,45 +4,43 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, computed, watch, onMounted } from "vue";
 import { Queue } from "@/utils/Queue";
-export default {
-  mounted() {
-    this.outputNumsStr = this.currentNumsStr;
+
+const { nums, isDelayed } = defineProps({
+  nums: {
+    type: Array as () => number[],
+    required: true,
   },
-  props: {
-    nums: {
-      type: Array,
-      required: true,
-    },
-    isDelayed: {
-      type: Boolean,
-      default: false,
-    },
+  isDelayed: {
+    type: Boolean,
+    default: false,
   },
-  data() {
-    return {
-      delayQueue: new Queue(),
-      outputNumsStr: null,
-    };
-  },
-  watch: {
-    nums() {
-      if (!this.isDelayed) {
-        this.delayQueue.clear();
-        this.outputNumsStr = this.currentNumsStr;
-      } else {
-        this.delayQueue.enqueue(this.currentNumsStr);
-        setTimeout(() => {
-          this.outputNumsStr = this.delayQueue.dequeue();
-        }, 3000);
-      }
-    },
-  },
-  computed: {
-    currentNumsStr() {
-      return this.nums.join(" ");
-    },
-  },
+});
+
+const delayQueue = new Queue<string>();
+const outputNumsStr = ref<string | null>(null);
+
+const currentNumsStr = computed(() => {
+  return nums.join(" ");
+});
+
+const updateOutput = () => {
+  if (!isDelayed) {
+    delayQueue.clear();
+    outputNumsStr.value = currentNumsStr.value;
+  } else {
+    delayQueue.enqueue(currentNumsStr.value);
+    setTimeout(() => {
+      outputNumsStr.value = delayQueue.dequeue();
+    }, 3000);
+  }
 };
+
+watch(() => nums, updateOutput);
+
+onMounted(() => {
+  outputNumsStr.value = currentNumsStr.value;
+});
 </script>
