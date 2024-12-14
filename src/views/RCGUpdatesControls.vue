@@ -7,38 +7,68 @@
     <v-btn color="warning" @click="resetCountRandomizations"> Reset </v-btn>
   </v-card-actions>
 </template>
-<script>
-export default {
-  props: {
-    nums: {
-      type: Array,
-      required: true,
-    },
-    isDelayed: {
-      type: Boolean,
-      default: false,
-    },
+<script setup lang="ts">
+import { ref, watch } from "vue";
+
+const countRandomizations = ref<number>(0);
+
+const { nums, isDelayed } = defineProps({
+  nums: {
+    type: Array<number>,
+    required: true,
   },
-  watch: {
-    nums() {
-      if (!this.isDelayed) {
-        this.countRandomizations += 1;
-        return;
-      }
-      setTimeout(() => {
-        this.countRandomizations += 1;
-      }, 3000);
-    },
+  isDelayed: {
+    type: Boolean,
+    default: false,
   },
-  data() {
-    return {
-      countRandomizations: 0,
-    };
-  },
-  methods: {
-    resetCountRandomizations() {
-      this.countRandomizations = 0;
-    },
-  },
+});
+
+const updateCounter = () => {
+  if (!isDelayed) {
+    countRandomizations.value += 1;
+    return;
+  }
+  setTimeout(() => {
+    countRandomizations.value += 1;
+  }, 3000);
 };
+
+watch(() => nums, updateCounter);
+
+function resetCountRandomizations() {
+  countRandomizations.value = 0;
+}
+// export default {
+//   props: {
+//     nums: {
+//       type: Array,
+//       required: true,
+//     },
+//     isDelayed: {
+//       type: Boolean,
+//       default: false,
+//     },
+//   },
+//   watch: {
+//     nums() {
+//       if (!this.isDelayed) {
+//         this.countRandomizations += 1;
+//         return;
+//       }
+//       setTimeout(() => {
+//         this.countRandomizations += 1;
+//       }, 3000);
+//     },
+//   },
+//   data() {
+//     return {
+//       countRandomizations: 0,
+//     };
+//   },
+//   methods: {
+//     resetCountRandomizations() {
+//       this.countRandomizations = 0;
+//     },
+//   },
+// };
 </script>
