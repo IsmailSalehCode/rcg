@@ -10,7 +10,7 @@ import { Queue } from "@/utils/Queue";
 
 const { nums, isDelayed } = defineProps({
   nums: {
-    type: Array as () => number[],
+    type: Array<number>,
     required: true,
   },
   isDelayed: {

@@ -33,7 +33,7 @@ import RCGDecimalValues from "./RCGDecimalValues.vue";
 import RCGHexColorValue from "./RCGHexColorValue.vue";
 import RCGUpdatesControls from "./RCGUpdatesControls.vue";
 
-defineProps<{ nums: Array<number> }>();
+const { nums } = defineProps({ nums: { type: Array<number>, required: true } });
 
 const selectedComponentName =
   ref<keyof typeof componentMap>("RCGUpdatesControls");
