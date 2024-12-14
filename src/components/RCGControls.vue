@@ -26,11 +26,11 @@ watch(shouldRandomize, (newVal) => {
   }
 });
 
-function startRand() {
+function startRand(): void {
   shouldRandomize.value = true;
 }
 
-function stopRand() {
+function stopRand(): void {
   shouldRandomize.value = false;
 }
 </script>
