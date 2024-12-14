@@ -71,33 +71,21 @@
   </v-app>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { ref } from "vue";
 import RCGControls from "./components/RCGControls.vue";
 import RCGDecimalValues from "./views/RCGDecimalValues.vue";
 import RCGHexColorValue from "./views/RCGHexColorValue.vue";
 import RCGUpdatesControls from "./views/RCGUpdatesControls.vue";
 import RCGViewSelector from "./views/RCGViewSelector.vue";
-export default {
-  components: {
-    RCGControls,
-    RCGDecimalValues,
-    RCGHexColorValue,
-    RCGUpdatesControls,
-    RCGViewSelector,
-  },
-  data() {
-    return {
-      rgbNums: [0, 0, 0],
-    };
-  },
-  methods: {
-    setRandomNums(): void {
-      const randomValue = () => Math.floor(Math.random() * 256);
-      const red = randomValue();
-      const green = randomValue();
-      const blue = randomValue();
-      this.rgbNums = [red, green, blue];
-    },
-  },
+
+const rgbNums = ref<[number, number, number]>([0, 0, 0]);
+
+const setRandomNums = (): void => {
+  const randomValue = () => Math.floor(Math.random() * 256);
+  const red = randomValue();
+  const green = randomValue();
+  const blue = randomValue();
+  rgbNums.value = [red, green, blue];
 };
 </script>
