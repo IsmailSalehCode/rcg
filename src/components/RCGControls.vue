@@ -1,6 +1,6 @@
 <template>
-  <v-btn color="success" @click="startRand">Start</v-btn>
-  <v-btn color="error" @click="stopRand">Stop</v-btn>
+  <v-btn color="success" @click="runRandomizer(true)">Start</v-btn>
+  <v-btn color="error" @click="runRandomizer(false)">Stop</v-btn>
 </template>
 
 <script setup lang="ts">
@@ -10,7 +10,7 @@ const emit = defineEmits<{
   (e: "generateNums"): void;
 }>();
 
-const shouldRandomize = ref(false);
+const shouldRandomize = ref<Boolean>(false);
 let intervalId: number | null = null;
 
 watch(shouldRandomize, (newVal) => {
@@ -26,11 +26,7 @@ watch(shouldRandomize, (newVal) => {
   }
 });
 
-function startRand(): void {
-  shouldRandomize.value = true;
-}
-
-function stopRand(): void {
-  shouldRandomize.value = false;
+function runRandomizer(val: Boolean): void {
+  shouldRandomize.value = val;
 }
 </script>
