@@ -79,7 +79,7 @@ import RCGHexColorValue from "./views/RCGHexColorValue.vue";
 import RCGUpdatesControls from "./views/RCGUpdatesControls.vue";
 import RCGViewSelector from "./views/RCGViewSelector.vue";
 
-const rgbNums = ref<[number, number, number]>([0, 0, 0]);
+const rgbNums = ref<number[]>([0, 0, 0]);
 
 const setRandomNums = (): void => {
   const randomValue = () => Math.floor(Math.random() * 256);
